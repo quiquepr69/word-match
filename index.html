@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,25 +8,39 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
 </head>
-
 <body class="bg-info text-white ">
     <header class="bg-secondary text-center p-3 mb-5">
         <h1>Word Match</h1>
     </header>
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-md-6 mx-auto text-center">
+                    <p class="lead">Type The Given Word Within
+                    <span class="h5" id="seconds"> 0 </span> Seconds:</p>
+                </div>  
+            </div>
+        </div>
+        <div class="container bg-secondary form-container ">
+            <form class="form-inline justify-content-center">
+                <label class="my-1 mr-2 h4" for="inlineFormCustomSelectPref">Level of Dificulty</label>
+                <select class="custom-select my-1 mr-sm-2" id="difLevel" onchange="init(event)">
+                <option selected>Choose...</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+                </select>
+            </form>
+        </div>
     <div class="container text-center">
-
         <!-- Word & Input -->
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <p class="lead">Type The Given Word Within
-                    <span class="h5" id="seconds"></span> Seconds:</p>
                 <p class="lead">Dificulty level:
                     <span id="level" class="h5"></span>
                 </p>
                 <h2 class="display-2 mb-5" id="current-word"></h2>
                 <input type="text" class="form-control form-control-lg" placeholder="Start typing..." id="word-input" autofocus>
-                <h4 class="mt-3" id="message"></h4>
-
+                <h3 class="mt-3 h4" id="message"></h3>
                 <!-- Time & Score Columns -->
                 <div class="row mt-5">
                     <div class="col-md-6">
@@ -41,20 +54,19 @@
                         </h3>
                     </div>
                 </div>
-
                 <!-- Instructions -->
-                <div class="row mt-5">
+                <div class="row mt-5 mb-4">
                     <div class="col-md-12">
                         <div class="card card-body bg-secondary text-white">
-                            <h5>Instructions</h5>
-                            <p>Type each word in the given amount of seconds to score. To play again, just type the current word. Your score will reset</p>
+                            <h4 claSS="h3">Instructions</h4>
+                            <p class="lead">Type each word in the given amount of seconds to score. To play again, just type the current word. Your score will reset</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="footer">
+    <footer class="footer text-center">
         <div class="container">
             <span class="text-muted">Copyright 2018 Carlos Ghigliotty.</span>
         </div>

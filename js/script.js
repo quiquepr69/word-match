@@ -1,23 +1,17 @@
 //window loads
-window.addEventListener('load', init);
+//window.addEventListener('load', init);
 
 //available levels
 const levels = {
-    easy: 11,
+    easy: 10,
     medium: 5,
     hard: 2
 }
-const dificulty = {
-    level1: 'Easy',
-    level2: 'Medium',
-    level3: 'Hard'
-}
 
 //global vars
-const currentLevel = levels.easy;
-const intensity = document.querySelector('#level');
-const intensityLevel = dificulty.level1;
-let time = 11;
+const e = document.getElementById("difLevel");
+let currentLevel;
+let time = currentLevel;
 let score = 0;
 let isPlaying;
 
@@ -28,6 +22,7 @@ const scoreDisplay = document.querySelector('#score');
 const timeDisplay = document.querySelector('#time');
 const message = document.querySelector('#message');
 const seconds = document.querySelector('#seconds');
+const intensity = document.querySelector('#level');
 
 //words array
 const words = [
@@ -63,23 +58,36 @@ const words = [
 ];
 
 //init game
-function init() {
-    seconds.innerHTML = currentLevel;
+function init(event) {
+    let selectElement = event.target;
+    let value = selectElement.value;
+    const intensityLevel = value;
+    if(value === 'easy'){
+        currentLevel = 11;
+    }else if(value === 'medium'){
+        currentLevel = 6;
+    }else if(value === 'hard'){
+        currentLevel = 3;
+    }
+    seconds.innerHTML = currentLevel - 1;
     intensity.innerHTML = intensityLevel;
     //load word from array
     showWord(words);
     //input match
     wordInput.addEventListener('input', startMatch)
-        //call countdown
+    //call countdown
     setInterval(countdown, 1000);
     //check if game is over
     setInterval(checkStatus, 50);
+    time = currentLevel;
+    countdown(time);
+    startMatch(time);
 }
 //start match
 function startMatch() {
     if (matchWords()) {
         isPlaying = true;
-        time = currentLevel + 1;
+        time = currentLevel;
         showWord(words);
         wordInput.value = '';
         score++;

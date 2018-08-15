@@ -3,7 +3,7 @@ window.addEventListener('load', init);
 
 //available levels
 const levels = {
-    easy: 10,
+    easy: 11,
     medium: 5,
     hard: 2
 }
@@ -17,7 +17,7 @@ const dificulty = {
 const currentLevel = levels.easy;
 const intensity = document.querySelector('#level');
 const intensityLevel = dificulty.level1;
-let time = 10;
+let time = 11;
 let score = 0;
 let isPlaying;
 

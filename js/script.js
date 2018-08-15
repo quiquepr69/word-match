@@ -26,7 +26,7 @@ const intensity = document.querySelector('#level');
 
 //words array
 const words = [
-    'hat',
+    'rameal',
     'river',
     'joker',
     'government',
@@ -55,6 +55,69 @@ const words = [
     'bustling',
     'befitting',
     'plausible',
+    'aunt',
+    'shape',
+    'successfully',
+    'primarily',
+    'cleverly',
+    'reproachfully',
+    'awkwardly',
+    'bedroom',
+    'writer',
+    'can',
+    'pizzas',
+    'step',
+    'leather',
+    'linen',
+    'sticks',
+    'channel',
+    'sheep',
+    'stretch',
+    'arithmetic',
+    'brick',
+    'sneeze',
+    'observe',
+    'subtract',
+    'gather',
+    'welcome',
+    'attack',
+    'psychedelic',
+    'thoughtful',
+    'vivacious',
+    'permissible',
+    'scrawny',
+    'brawny',
+    'quizzical',
+    'aboard',
+    'considering',
+    'opposite',
+    'excluding',
+    'cunabula',
+    'deontology',
+    'velation',
+    'multifid',
+    'temporicide',
+    'uromastix',
+    'kentledge',
+    'aculeiform',
+    'xoanon',
+    'gasiform',
+    'palmary',
+    'idiograph',
+    'cathead',
+    'dilettante',
+    'green',
+    'daffy',
+    'adaptable',
+    'incredible',
+    'incredible',
+    'chivalrous',
+    'hesitant',
+    'inquisitive',
+    'earsplitting',
+    'lamentable',
+    'hypnotic',
+    'domineering',
 ];
 
 //init game
@@ -62,11 +125,11 @@ function init(event) {
     let selectElement = event.target;
     let value = selectElement.value;
     const intensityLevel = value;
-    if(value === 'easy'){
+    if (value === 'easy') {
         currentLevel = 11;
-    }else if(value === 'medium'){
+    } else if (value === 'medium') {
         currentLevel = 6;
-    }else if(value === 'hard'){
+    } else if (value === 'hard') {
         currentLevel = 3;
     }
     seconds.innerHTML = currentLevel - 1;
@@ -75,7 +138,7 @@ function init(event) {
     showWord(words);
     //input match
     wordInput.addEventListener('input', startMatch)
-    //call countdown
+        //call countdown
     setInterval(countdown, 1000);
     //check if game is over
     setInterval(checkStatus, 50);

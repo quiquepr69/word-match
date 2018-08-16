@@ -1,6 +1,3 @@
-//window loads
-//window.addEventListener('load', init);
-
 //available levels
 const levels = {
     easy: 10,
@@ -138,7 +135,7 @@ function init(event) {
     showWord(words);
     //input match
     wordInput.addEventListener('input', startMatch)
-        //call countdown
+    //call countdown
     setInterval(countdown, 1000);
     //check if game is over
     setInterval(checkStatus, 50);

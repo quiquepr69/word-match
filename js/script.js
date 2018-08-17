@@ -2,7 +2,7 @@
 const levels = {
     easy: 10,
     medium: 5,
-    hard: 2
+    hard: 3
 }
 
 //global vars
@@ -11,6 +11,7 @@ let currentLevel;
 let time = currentLevel;
 let score = 0;
 let isPlaying;
+let hardLevel;
 
 //DOM elements
 const wordInput = document.querySelector('#word-input');
@@ -20,14 +21,94 @@ const timeDisplay = document.querySelector('#time');
 const message = document.querySelector('#message');
 const seconds = document.querySelector('#seconds');
 const intensity = document.querySelector('#level');
+let instructions = document.querySelector('.instructions');
+let card = document.querySelector('.instructionCard');
 
 //words array
+const hardWords = [
+    'government',
+    'aboriginal',
+    'disagreeable',
+    'successfully',
+    'reproachfully',
+    'arithmetic',
+    'pulchritudinous',
+    'superannuated',
+    'psychedelic',
+    'antediluvian',
+    'aermissible',
+    'considering',
+    'pandemonium',
+    'temporicide',
+    'aculeiform',
+    'inquisitive',
+    'septuagenarian',
+    'cruciverbalist',
+    'callipygian',
+    'perissology',
+    'earsplitting',
+    'absquatulate',
+    'domineering',
+    'digitigradient',
+    'torschlusspanik',
+    'anopisthograph',
+    'effluvium',
+    'verisimilitude',
+    'dendrochronology',
+    'blesiloquent',
+    'abligurition',
+    'brobdingnagian',
+    'paraphernalia',
+    'battologist',
+    'Kinnikinnick',
+    'transmundane',
+    'verticordious',
+    'houghmangandy',
+    'xylopyrography',
+    'spondulicks',
+    'finnimbrun',
+    'cryptaesthesia',
+    'oneirocritical',
+    'nudiustertian',
+    'perhendinancer',
+    'thwarterous',
+    'rhyparographer',
+    'winklepicker',
+    'pandiculation'
+];
 const words = [
+    'euphemism',
+    'eloquence',
+    'sneaksbies',
+    'eloquence',
+    'agonistarch',
+    'depressed',
+    'befitting',
+    'plausible',
+    'jaculiferous',
+    'mammothrept',
+    'concinnous',
+    'awkwardly',
+    'chirography',
+    'emmetropia',
+    'esquivalience',
+    'thoughtful',
+    'calamistrate',
+    'delitescent',
+    'vivacious',
+    'deontology',
+    'ostrobogulous',
+    'gammerstang',
+    'agiotage',
+    'disgusting',
+    'antonomasia',
+    'umquhile',
+    'tittynope',
+    'vomitory',
+    'pickpocket',
     'rameal',
     'river',
     'joker',
-    'government',
-    'aboriginal',
     'flippant',
     'abundant',
     'languid',
@@ -44,21 +125,13 @@ const words = [
     'aberrant',
     'broad',
     'mourn',
-    'disagreeable',
-    'depressed',
+    'yeuk',
     'thirsty',
-    'ambitious',
-    'disgusting',
     'bustling',
-    'befitting',
-    'plausible',
     'aunt',
     'shape',
-    'successfully',
     'primarily',
     'cleverly',
-    'reproachfully',
-    'awkwardly',
     'bedroom',
     'writer',
     'can',
@@ -70,7 +143,6 @@ const words = [
     'channel',
     'sheep',
     'stretch',
-    'arithmetic',
     'brick',
     'sneeze',
     'observe',
@@ -78,25 +150,17 @@ const words = [
     'gather',
     'welcome',
     'attack',
-    'psychedelic',
-    'thoughtful',
-    'vivacious',
-    'permissible',
     'scrawny',
     'brawny',
     'quizzical',
-    'aboard',
-    'considering',
+    'board',
     'opposite',
     'excluding',
     'cunabula',
-    'deontology',
     'velation',
     'multifid',
-    'temporicide',
     'uromastix',
     'kentledge',
-    'aculeiform',
     'xoanon',
     'gasiform',
     'palmary',
@@ -110,26 +174,32 @@ const words = [
     'incredible',
     'chivalrous',
     'hesitant',
-    'inquisitive',
-    'earsplitting',
     'lamentable',
     'hypnotic',
-    'domineering',
+    
 ];
 
 //init game
 function init(event) {
+    instructions.innerHTML = '';
+    card.innerHTML = '';
     let selectElement = event.target;
     let value = selectElement.value;
-    const intensityLevel = value;
+    let intensityLevel = value;
     if (value === 'easy') {
-        currentLevel = 11;
+        currentLevel = levels.easy;
+        intensityLevel = 'Easy';
+        hardLevel = false;
     } else if (value === 'medium') {
-        currentLevel = 6;
+        currentLevel = levels.medium;
+        intensityLevel = 'Medium';
+        hardLevel = false;
     } else if (value === 'hard') {
-        currentLevel = 3;
+        currentLevel = levels.hard;
+        intensityLevel = 'Hard';
+        hardLevel = true;
     }
-    seconds.innerHTML = currentLevel - 1;
+    seconds.innerHTML = currentLevel;
     intensity.innerHTML = intensityLevel;
     //load word from array
     showWord(words);
@@ -139,15 +209,18 @@ function init(event) {
     setInterval(countdown, 1000);
     //check if game is over
     setInterval(checkStatus, 50);
-    time = currentLevel;
+    time = currentLevel + 1;
     countdown(time);
     startMatch(time);
+    showWord(hardLevel) 
+    
 }
+
 //start match
 function startMatch() {
     if (matchWords()) {
         isPlaying = true;
-        time = currentLevel;
+        time = currentLevel + 1;
         showWord(words);
         wordInput.value = '';
         score++;
@@ -170,9 +243,16 @@ function matchWords() {
     }
 }
 
-function showWord(words) {
-    const randomIndex = Math.floor(Math.random() * words.length);
-    currentWord.innerHTML = words[randomIndex];
+function showWord() {
+   
+    if(hardLevel){
+        const randomIndexHard = Math.floor(Math.random() *hardWords.length);
+        currentWord.innerHTML = hardWords[randomIndexHard];
+    }else{
+        const randomIndex = Math.floor(Math.random() *words.length);
+        currentWord.innerHTML = words[randomIndex];
+    }
+    
 }
 
 //countdown
